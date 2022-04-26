@@ -1,4 +1,4 @@
-# P2P_SWAP_ITALIA
+# P2P_SWAP_MULTI-PROTOCOL_BITCOIN
 
 Mercato di swap Bitcoin tra
 Lightning Network LN-BTC, Onchain BTC e Liquid L-BTC
@@ -80,3 +80,17 @@ Si usa il sistema di hashtag per facilitare la ricerca degli annunci.
 Tutti gli importi sono espressi in satoshi.
 La controparte che invia da rete Liquid oppure Onchain é sempre quella che deve inviare il pegno all'arbitro in quanto la sua transazione, a differenza di quella effettuata su rete Lightning, è sempre quella più lenta e potrebbe essere annullata effettuando una nuova tx che spenda lo stesso importo verso un indirizzo diverso da quello concordato. Per tale motivo si aspettano anche 6 conferme Onchain prima di ottenere indietro il pegno.
 Le controparti possono scambiarsi gli indirizzi Onchain utilizzando pgp per ottenere ulteriore privacy nei confronti dell'arbitro.
+
+
+***
+# PROBLEMATICHE E CORREZIONI
+Attualmente il protocollo così sviluppato prevede un alto grado di fiducia nei confronti dell'arbitro. Il problema potrebbe essere risolto in più modalità:
+A. Arbitro non obbligatorio. Le parti coinvolte nello scambio possono non richiedere l'intermediazione dell'escrow e gestire lo scambio in autonomia. Questo processo è altamente rischioso in quanto la parte che invia coin per primo potrebbe non ricevere la controparte dal secondo partecipante allo scambio.
+B. Artibri responsabili nei confronti degli altri arbitri. Ogni nuovo arbitro potrà accedere al ruolo con l'accettazione del 50%+1 degli arbitri già esistenti. Ogni arbitro è responsabile nei confronti degli altri arbitri e rimborserà in maniera proporzionale l'eventuale pegno in caso di escrow malevolo. (es: in caso in cui l'escrow che partecipa allo scambio non restituisce il pegno dovuto gli altri arbitri rimborsano la persona che deve ricevere il pegno in maniera proporzionale -se ci sono 5 arbitri ognuno pagherà il 100%/5 = 20% dell'importo dovuto, non trattenendo alcuna percentuale di guadagno)
+C. Portafogli multisig 2 di 3 in cui i fondi del pegno possono essere sbloccati in autonomia dai partecipanti allo scambio oppure da uno dei due + l'escrow in caso in cui un partecipante non collabori allo sblocco dei fondi)
+
+Per quanto riguarda l'inizio dello scambio, il protocollo attuale prevede che una delle due parti (es: chi invia btc Onchain e chiede LN-btc) possieda già delle coin sul protocollo opposto (es: in questo esempio chi invia btc Onchain deve già possedere LN-btc) per l'invio del pegno. Questo problema può essere risolto accordandosi per l'invio del pegno su altro protocollo (es: il pegno viene inviato Onchain e "accettato" dopo 6 conferme della rete)
+
+
+Sono possibili altri problemi non affrontati, la collaborazione per il miglioramento del protocollo di swap è ben accetta.
+Il progetto si intende "Libero", chiunque può apportare modifiche migliorative.
